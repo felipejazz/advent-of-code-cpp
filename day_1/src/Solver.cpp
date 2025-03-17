@@ -55,7 +55,6 @@ unordered_map<int, int> Solver::countOccurrences(vector<int> origin, vector<int>
     int destinationSize = destination.size();
 
     for (const int &originElement : origin) {
-        // Se já foi contado, pula para o próximo elemento
         if (map.find(originElement) != map.end()) {
             continue;
         }
