@@ -6,10 +6,10 @@ public:
         vector<int> leftValues;
         vector<int> rightValues;
 
-        for (const vector<int>& col : data) {
-            int left = col[0];
+        for (const vector<int>& row : data) {
+            int left = row[0];
             leftValues.push_back(left);
-            int right = col[1];
+            int right = row[1];
             rightValues.push_back(right);
         }
     
@@ -30,10 +30,10 @@ public:
         vector<int> leftValues;
         vector<int> rightValues;
 
-        for (const vector<int>& col : data) {
-            int left = col[0];
+        for (const vector<int>& row : data) {
+            int left = row[0];
             leftValues.push_back(left);
-            int right = col[1];
+            int right = row[1];
             rightValues.push_back(right);
         }
     
