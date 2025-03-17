@@ -1,33 +1,26 @@
-#include "Solver.hpp"
+#include "Day1Solver.cpp"
 #include <iostream>
 #include <chrono>
 #include <sys/resource.h>
 
 using namespace std;
 
-// Função auxiliar para obter o uso de memória (ru_maxrss em kilobytes)
-long getMemoryUsage() {
-    struct rusage usage;
-    getrusage(RUSAGE_SELF, &usage);
-    return usage.ru_maxrss;
-}
-
 int main() {
-    Solver solver;
+    Day1Solver solver;
     vector<string> rows = solver.readInput("../src/input/input.txt");
-    pair<vector<int>, vector<int>> colsPairs = solver.parse(rows);
+    vector<vector<int>> colsPairs = solver.parse(rows);
     
-    auto startTimePart1 = chrono::high_resolution_clock::now();
+    auto startTimePart1 = solver.getTime();
     int result1 = solver.solvePt1(colsPairs);
-    auto endTimePart1 = chrono::high_resolution_clock::now();
-    auto durationPart1 = chrono::duration_cast<chrono::milliseconds>(endTimePart1 - startTimePart1).count();
-    long memUsagePart1 = getMemoryUsage();
+    auto endTimePart1 = solver.getTime();
+    auto durationPart1 = solver.calculateDuration(startTimePart1, endTimePart1);
+    long memUsagePart1 = solver.getMemoryUsage();
 
-    auto startTimePart2 = chrono::high_resolution_clock::now();
+    auto startTimePart2 = solver.getTime();
     int result2 = solver.solvePt2(colsPairs);
-    auto endTimePart2 = chrono::high_resolution_clock::now();
-    auto durationPart2 = chrono::duration_cast<chrono::milliseconds>(endTimePart2 - startTimePart2).count();
-    long memUsagePart2 = getMemoryUsage();
+    auto endTimePart2 = solver.getTime();
+    auto durationPart2 = solver.calculateDuration(startTimePart2, endTimePart2);
+    long memUsagePart2 = solver.getMemoryUsage();
 
     cout << "Part 1:" << endl;
     cout << "  Result: " << result1 << endl;

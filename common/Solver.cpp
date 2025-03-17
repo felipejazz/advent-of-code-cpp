@@ -1,5 +1,13 @@
 #include "Solver.hpp"
 
+
+
+long getMemoryUsage() {
+    struct rusage usage;
+    getrusage(RUSAGE_SELF, &usage);
+    return usage.ru_maxrss;
+}
+
 vector<string> Solver::readInput(const string &filePath) {
     vector<string> rows;
     ifstream file(filePath);
@@ -15,20 +23,18 @@ vector<string> Solver::readInput(const string &filePath) {
     return rows;
 }
 
-
-pair<vector<int>, vector<int>> Solver::parse(const vector<string> &rows) {
-    vector<int> leftValues;
-    vector<int> rightValues;
-
+vector<vector<int>> Solver::parse(const vector<string> &rows) {
+    vector<vector<int>> parsedData;
     for (const string &row : rows) {
         istringstream iss(row);
-        int esquerda, direita;
-        if (iss >> esquerda >> direita) {
-            leftValues.push_back(esquerda);
-            rightValues.push_back(direita);
+        vector<int> numbers;
+        int value;
+        while (iss >> value) {
+            numbers.push_back(value);
         }
+        parsedData.push_back(numbers);
     }
-    return make_pair(leftValues, rightValues);
+    return parsedData;
 }
 
 int Solver::binarySearch(const vector<int>& array, int item, int low, int high) {
@@ -91,47 +97,19 @@ void Solver::binaryInsertionSort(vector<int>& array) {
     return;
 }
 
+long Solver::getMemoryUsage() {
+    struct rusage usage;
+    getrusage(RUSAGE_SELF, &usage);
+    
+    return usage.ru_maxrss;
+    
+};
 
-int Solver::solvePt1(pair<vector<int>, vector<int>> data) {
-
-    vector<int> leftValues = data.first;
-    vector<int> rightValues = data.second;
-
-    binaryInsertionSort(rightValues);
-    binaryInsertionSort(leftValues);
-
-    int result = 0;
-
-    for(int i = 0; i < leftValues.size(); i++){
-        int leftValue = leftValues[i];
-        int righValue = rightValues[i];
-        int sub = abs(leftValue - righValue);
-
-        result += sub;
-
-    }
-
-    return result;
-
+chrono::high_resolution_clock::time_point Solver::getTime() {
+    return chrono::high_resolution_clock::now();
 }
 
-int Solver::solvePt2(pair<vector<int>, vector<int>> data) {
-
-    vector<int> leftValues = data.first;
-    vector<int> rightValues = data.second;
-
-    unordered_map mappedOcurrences = countOccurrences(leftValues, rightValues);
-    
-    int result = 0;
-
-    for(int i = 0; i < leftValues.size(); i++){
-        int leftValue = leftValues[i];
-        int occurences = mappedOcurrences[leftValue];
-        int tempCalculation = leftValue * occurences;
-
-        result += tempCalculation;
-    }
-
-    return result;
-
+long Solver::calculateDuration(chrono::high_resolution_clock::time_point startTime,
+                              chrono::high_resolution_clock::time_point endTime) {
+    return chrono::duration_cast<chrono::milliseconds>(endTime - startTime).count();
 }

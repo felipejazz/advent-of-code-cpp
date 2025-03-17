@@ -8,21 +8,17 @@ This repository contains my solutions for [Advent of Code](https://adventofcode.
 Each day's challenge is organized in its own directory (e.g., `day_1`, `day_2`, etc.). A typical structure for a day's solution is as follows:
 
 ```bash
-day_1/
-├── CMakeLists.txt
-├── include
-│   └── Solver.hpp       # Header files for the solution
-├── src
-│   ├── CMakeLists.txt
-│   ├── input
-│   │   └── input.txt    # Challenge input file 
-│   ├── main.cpp         # Entry point for the solution
-│   └── Solver.cpp       # Implementation of the solution
-└── tests
-    ├── CMakeLists.txt
-    ├── input
-    │   └── input.txt    
-    └── TestSolver.cpp   # Test cases using assert for validation
+.
+├── common/               # Shared Solver Class
+│   ├── Solver.cpp        # Base implementation Solver Class
+│   └── Solver.hpp        # Abstract Class with common methods
+├── day_1/                # Day 1 solution
+│   ├── src/              # Specific source code
+│   │   ├── Day1Solver.cpp # Implementation of  solvePt1/solvePt2 methods
+│   │   └── ...           
+│   └── tests/            
+├── day_2/                
+└── ...                   
 
 ```
 ## How to Build and Test

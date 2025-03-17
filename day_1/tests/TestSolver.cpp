@@ -1,15 +1,29 @@
-#include "Solver.hpp"
+#include "Day1Solver.cpp"
 #include <cassert>
 #include <iostream>
 
 using namespace std;
 
+
+ostream& operator<<(ostream& os, const vector<int>& vec) {
+    os << "[";
+    for (size_t i = 0; i < vec.size(); ++i) {
+        os << vec[i];
+        if (i != vec.size() - 1) {
+            os << ", ";
+        }
+    }
+    os << "]";
+    return os;
+}
+
 void testSolver() {
     cout << "Starting tests for Solver..." << endl;
     
-    Solver solver;
+    Day1Solver solver;
     vector<string> rows = solver.readInput("../tests/input/input.txt");
-    pair<vector<int>, vector<int>> colsPairs = solver.parse(rows);
+    vector<vector<int>> colsPairs = solver.parse(rows);
+
     int result1 = solver.solvePt1(colsPairs);
     cout << "Result: " << result1 << endl;
     
