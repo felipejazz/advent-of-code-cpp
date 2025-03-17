@@ -1,6 +1,9 @@
 #include "Solver.hpp" 
 #include <stack>
+#include <vector>
+#include <cstdlib>
 
+using namespace std;
 
 bool isRowSafePt(const vector<int>& row) {
     if (row.size() < 2) return false;
@@ -9,7 +12,7 @@ bool isRowSafePt(const vector<int>& row) {
     bool increasing;
     
     for (int i = 1; i < row.size(); ++i) {
-        int current = row[i-1];
+        int current = row[i - 1];
         int next = row[i];
         int diff = current - next;
         int absolute_diff = abs(diff);
@@ -27,23 +30,13 @@ bool isRowSafePt(const vector<int>& row) {
     return true;
 }
 
-
 class Day2Solver : public Solver {
 public:
     int solvePt1(const vector<vector<int>> &data) override {
         int counter = 0;
         for (const vector<int>& row : data) {
-            cout << "\nProcessing row: ";
-            for(int num : row) cout << num << " ";
-            cout << endl;
-            
-            bool safe = isRowSafePt(row);
-            
-            if(safe) {
+            if (isRowSafePt(row)) {
                 counter++;
-                cout << "[SAFE] Row accepted (total safe: " << counter << ")" << endl;
-            } else {
-                cout << "[UNSAFE] Row rejected" << endl;
             }
         }
         return counter;
