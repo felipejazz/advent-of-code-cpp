@@ -1,5 +1,4 @@
 #include "Solver.hpp" 
-#include <stack>
 #include <vector>
 #include <cstdlib>
 
@@ -30,11 +29,12 @@ bool isRowSafePt(const vector<int>& row) {
     return true;
 }
 
-class Day2Solver : public Solver {
+template <typename T>
+class Day2Solver : public Solver<T> {
 public:
-    int solvePt1(const vector<vector<int>> &data) override {
+    int solvePt1(const vector<vector<T>> &data) override {
         int counter = 0;
-        for (const vector<int>& row : data) {
+        for (const vector<T>& row : data) {
             if (isRowSafePt(row)) {
                 counter++;
             }
@@ -42,9 +42,9 @@ public:
         return counter;
     }
 
-    int solvePt2(const vector<vector<int>> &data) override {
+    int solvePt2(const vector<vector<T>> &data) override {
         int counter = 0;
-        for (const vector<int>& row : data) {
+        for (const vector<T>& row : data) {
             if (isRowSafePt(row)) {
                 counter++;
                 continue;
@@ -72,3 +72,5 @@ public:
         return counter;
     }
 };
+
+

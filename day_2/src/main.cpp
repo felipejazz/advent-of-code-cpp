@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    Day2Solver solver;
+    Day2Solver<int> solver;
     vector<string> rows = solver.readInput("../src/input/input.txt");
     vector<vector<int>> colsPairs = solver.parse(rows);
     

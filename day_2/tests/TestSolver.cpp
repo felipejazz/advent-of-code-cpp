@@ -9,7 +9,7 @@ using namespace std;
 void testSolver() {
     cout << "Starting tests for Solver..." << endl;
     
-    Day2Solver solver;
+    Day2Solver<int> solver;
     vector<string> rawRows = solver.readInput("../tests/input/input.txt");
     vector<vector<int>> rows = solver.parse(rawRows);
     cout << "\n Parsed data (" << rows.size() << " rows):" << endl;

@@ -20,7 +20,7 @@ ostream& operator<<(ostream& os, const vector<int>& vec) {
 void testSolver() {
     cout << "Starting tests for Solver..." << endl;
     
-    Day1Solver solver;
+    Day1Solver<int> solver;
     vector<string> rows = solver.readInput("../tests/input/input.txt");
     vector<vector<int>> colsPairs = solver.parse(rows);
 

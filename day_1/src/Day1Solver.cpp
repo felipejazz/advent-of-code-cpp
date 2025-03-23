@@ -1,22 +1,24 @@
 #include "Solver.hpp" 
 
-class Day1Solver : public Solver {
-public:
-    int solvePt1(const vector<vector<int>> &data) override {
-        vector<int> leftValues;
-        vector<int> rightValues;
 
-        for (const vector<int>& row : data) {
-            int left = row[0];
+template <typename T>
+class Day1Solver : public Solver<T> {
+public:
+    int solvePt1(const vector<vector<T>> &data) override {
+        vector<T> leftValues;
+        vector<T> rightValues;
+
+        for (const vector<T>& row : data) {
+            T left = row[0];
             leftValues.push_back(left);
-            int right = row[1];
+            T right = row[1];
             rightValues.push_back(right);
         }
     
         
 
-        binaryInsertionSort(rightValues);
-        binaryInsertionSort(leftValues);
+        this->binaryInsertionSort(rightValues);
+        this->binaryInsertionSort(leftValues);
         
         int result = 0;
         for (size_t i = 0; i < leftValues.size(); i++) { 
@@ -25,25 +27,25 @@ public:
         return result;
     }
 
-    int solvePt2(const vector<vector<int>> &data) override {
+    int solvePt2(const vector<vector<T>> &data) override {
 
-        vector<int> leftValues;
-        vector<int> rightValues;
+        vector<T> leftValues;
+        vector<T> rightValues;
 
-        for (const vector<int>& row : data) {
-            int left = row[0];
+        for (const vector<T>& row : data) {
+            T left = row[0];
             leftValues.push_back(left);
-            int right = row[1];
+            T right = row[1];
             rightValues.push_back(right);
         }
     
-        unordered_map mappedOcurrences = countOccurrences(leftValues, rightValues);
+        unordered_map mappedOcurrences = this->countOccurrences(leftValues, rightValues);
         
         int result = 0;
     
         for(int i = 0; i < leftValues.size(); i++){
-            int leftValue = leftValues[i];
-            int occurences = mappedOcurrences[leftValue];
+            T leftValue = leftValues[i];
+            T occurences = mappedOcurrences[leftValue];
             int tempCalculation = leftValue * occurences;
     
             result += tempCalculation;

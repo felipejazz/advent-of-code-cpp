@@ -1,5 +1,4 @@
 add_library(Day1
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../common/Solver.cpp
     Day1Solver.cpp
 )
 
